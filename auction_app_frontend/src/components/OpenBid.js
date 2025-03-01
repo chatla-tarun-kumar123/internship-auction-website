@@ -11,7 +11,7 @@ function OpenBid() {
                     <br></br>
                     {"EXTRA INFO"}
                 </p>
-                <h3>Highest BID: {"₹1000"}</h3>
+                <h3>Highest BID: {"₹1000"}</h3> 
                 <div className="d-flex flex-row gap-4">
                     <div class="form-group d-flex flex-row">
                         <label for="formGroupExampleInput">YOUR BID :</label>

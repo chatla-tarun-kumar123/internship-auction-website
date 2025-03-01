@@ -7,7 +7,7 @@ import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
 import Footer from "./components/Footer";
 import OpenAuctions from "./components/OpenAuctions";
-import OpenItems from "./components/OpenItems";
+// import OpenItems from "./components/OpenItems";
 import OpenBid from "./components/OpenBid";
 
 function App() {
@@ -19,8 +19,8 @@ function App() {
                 <Route path="/aboutus" element={<AboutUs />} />
                 <Route path="/signup" element={<SignUp />} />
                 <Route path="/signin" element={<SignIn />} />
-                <Route path="/openauction" element={<OpenAuctions />}/>
-                <Route path="openbid" element={<OpenBid />} />
+                <Route path="/openauction" element={<OpenAuctions />} />
+                <Route path="/openbid" element={<OpenBid />} />
             </Routes>
             <Footer />
         </>

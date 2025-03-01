@@ -1,5 +1,8 @@
 {
-  "dependencies": {
-    "create-react-app": "^5.1.0"
-  }
+    "dependencies": {
+        "create-react-app": "^5.1.0"
+    },
+    "scripts": {
+        "start": "node index.js"
+    }
 }

@@ -18,27 +18,13 @@ function SignUp() {
 
                 <div className="col-md-4">
                     <label htmlFor="validationServer01" className="form-label">
-                        First name
+                        Username
                     </label>
                     <input
                         type="text"
                         className="form-control is-valid"
                         id="validationServer01"
-                        placeholder="First name"
-                        required
-                    />
-                    <div className="valid-feedback">Looks good!</div>
-                </div>
-
-                <div className="col-md-4">
-                    <label htmlFor="validationServer02" className="form-label">
-                        Last name
-                    </label>
-                    <input
-                        type="text"
-                        className="form-control is-valid"
-                        id="validationServer02"
-                        placeholder="Last name"
+                        placeholder="Username"
                         required
                     />
                     <div className="valid-feedback">Looks good!</div>
@@ -46,7 +32,7 @@ function SignUp() {
 
                 <div className="col-md-4">
                     <label htmlFor="validationServerUsername" className="form-label">
-                        Username
+                        Email
                     </label>
                     <div className="input-group has-validation">
                         <span className="input-group-text">@</span>
@@ -54,14 +40,27 @@ function SignUp() {
                             type="text"
                             className="form-control is-invalid"
                             id="validationServerUsername"
-                            placeholder="Username"
+                            placeholder="Email"
                             required
                         />
-                        <div className="invalid-feedback">Please choose a username.</div>
+                        <div className="invalid-feedback">invalid feedback.</div>
                     </div>
                 </div>
 
-                <div className="col-md-6">
+                <div className="col-md-4">
+                    <label htmlFor="validationServer02" className="form-label">
+                        Password
+                    </label>
+                    <input
+                        type="text"
+                        className="form-control is-valid"
+                        id="validationServer02"
+                        placeholder="Password"
+                        required
+                    />
+                    <div className="valid-feedback">Looks good!</div>
+                </div>
+                {/* <div className="col-md-6">
                     <label htmlFor="validationServer03" className="form-label">
                         City
                     </label>
@@ -73,8 +72,8 @@ function SignUp() {
                         required
                     />
                     <div className="invalid-feedback">Please provide a valid city.</div>
-                </div>
-
+                </div> */}
+                {/* 
                 <div className="col-md-3">
                     <label htmlFor="validationServer04" className="form-label">
                         State
@@ -87,9 +86,9 @@ function SignUp() {
                         <option>State 2</option>
                     </select>
                     <div className="invalid-feedback">Please select a valid state.</div>
-                </div>
+                </div> */}
 
-                <div className="col-md-3">
+                {/* <div className="col-md-3">
                     <label htmlFor="validationServer05" className="form-label">
                         Zip
                     </label>
@@ -101,7 +100,7 @@ function SignUp() {
                         required
                     />
                     <div className="invalid-feedback">Please provide a valid zip.</div>
-                </div>
+                </div> */}
 
                 <div className="col-12">
                     <div className="form-check">
