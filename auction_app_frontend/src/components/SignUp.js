@@ -1,122 +1,156 @@
-import React from "react";
+import axios from "axios";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function SignUp() {
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [email, setEmail] = useState("");
+    const [error, setError] = useState("");
+    const [usernameError, setUsernameError] = useState("");
+    const [emailError, setEmailError] = useState("");
+    const [passwordError, setPasswordError] = useState("");
+    const navigate = useNavigate();
+
+    const handleSignup = async (e) => {
+        e.preventDefault(); // Prevent form reload
+        setError(""); // Reset general error
+        setUsernameError(""); // Reset username error
+        setEmailError(""); // Reset email error
+        setPasswordError(""); // Reset password error
+
+        if (!username) {
+            setUsernameError("Username is required");
+        }
+        if (!email) {
+            setEmailError("Email is required");
+        }
+        if (!password) {
+            setPasswordError("Password is required");
+        }
+        if (!username || !email || !password) {
+            return;
+        }
+
+        try {
+            await axios.post("http://localhost:3001/signup", {
+                username,
+                email,
+                password,
+            });
+
+            alert("Signup successful! Please sign in.");
+            navigate("/signin"); // Redirect to signin page
+        } catch (err) {
+            console.log("Signup Error:", err.response?.data || err.message);
+
+            // Handle specific error messages from backend
+            if (err.response?.data?.message.includes("Username already exists")) {
+                setUsernameError("Username is already taken. Try another.");
+            } else {
+                setError(err.response?.data?.message || "Signup failed. Please try again.");
+            }
+        }
+    };
+
     return (
         <div
-            className="d-flex justify-content-center align-items-center mx-auto w-50 "
+            className="d-flex justify-content-center align-items-center mx-auto w-50"
             style={{
-                marginBottom: "50px",
+                margin: "100px auto",
                 borderRadius: "10px",
                 boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.1)",
                 backgroundColor: "#f8f9fa",
             }}
         >
-            <form className="row g-3" style={{ width: "100%" }}>
+            <form className="row g-3" style={{ width: "100%" }} onSubmit={handleSignup}>
                 <h2 className="text-center w-100" style={{ color: "#007bff", marginBottom: "20px" }}>
                     Sign Up
                 </h2>
 
+                {/* Username Field */}
                 <div className="col-md-4">
-                    <label htmlFor="validationServer01" className="form-label">
+                    <label htmlFor="username" className="form-label">
                         Username
                     </label>
                     <input
                         type="text"
-                        className="form-control is-valid"
-                        id="validationServer01"
+                        className={`form-control ${usernameError ? "is-invalid" : "is-valid"}`}
+                        id="username"
                         placeholder="Username"
+                        value={username}
+                        onChange={(e) => {
+                            setUsername(e.target.value);
+                            setUsernameError(""); // Clear error on change
+                        }}
                         required
                     />
-                    <div className="valid-feedback">Looks good!</div>
+                    {usernameError && <div className="invalid-feedback">{usernameError}</div>}
                 </div>
 
+                {/* Email Field */}
                 <div className="col-md-4">
-                    <label htmlFor="validationServerUsername" className="form-label">
+                    <label htmlFor="email" className="form-label">
                         Email
                     </label>
                     <div className="input-group has-validation">
                         <span className="input-group-text">@</span>
                         <input
-                            type="text"
-                            className="form-control is-invalid"
-                            id="validationServerUsername"
+                            type="email"
+                            className={`form-control ${emailError ? "is-invalid" : "is-valid"}`}
+                            id="email"
                             placeholder="Email"
+                            value={email}
+                            onChange={(e) => {
+                                setEmail(e.target.value);
+                                setEmailError(""); // Clear error on change
+                            }}
                             required
                         />
-                        <div className="invalid-feedback">invalid feedback.</div>
+                        {emailError && <div className="invalid-feedback">{emailError}</div>}
                     </div>
                 </div>
 
+                {/* Password Field */}
                 <div className="col-md-4">
-                    <label htmlFor="validationServer02" className="form-label">
+                    <label htmlFor="password" className="form-label">
                         Password
                     </label>
                     <input
-                        type="text"
-                        className="form-control is-valid"
-                        id="validationServer02"
+                        type="password"
+                        className={`form-control ${passwordError ? "is-invalid" : "is-valid"}`}
+                        id="password"
                         placeholder="Password"
+                        value={password}
+                        onChange={(e) => {
+                            setPassword(e.target.value);
+                            setPasswordError(""); // Clear error on change
+                        }}
                         required
                     />
-                    <div className="valid-feedback">Looks good!</div>
+                    {passwordError && <div className="invalid-feedback">{passwordError}</div>}
                 </div>
-                {/* <div className="col-md-6">
-                    <label htmlFor="validationServer03" className="form-label">
-                        City
-                    </label>
-                    <input
-                        type="text"
-                        className="form-control is-invalid"
-                        id="validationServer03"
-                        placeholder="City"
-                        required
-                    />
-                    <div className="invalid-feedback">Please provide a valid city.</div>
-                </div> */}
-                {/* 
-                <div className="col-md-3">
-                    <label htmlFor="validationServer04" className="form-label">
-                        State
-                    </label>
-                    <select className="form-select is-invalid" id="validationServer04" required>
-                        <option selected disabled value="">
-                            Choose...
-                        </option>
-                        <option>State 1</option>
-                        <option>State 2</option>
-                    </select>
-                    <div className="invalid-feedback">Please select a valid state.</div>
-                </div> */}
 
-                {/* <div className="col-md-3">
-                    <label htmlFor="validationServer05" className="form-label">
-                        Zip
-                    </label>
-                    <input
-                        type="text"
-                        className="form-control is-invalid"
-                        id="validationServer05"
-                        placeholder="Zip Code"
-                        required
-                    />
-                    <div className="invalid-feedback">Please provide a valid zip.</div>
-                </div> */}
-
+                {/* Terms and Conditions */}
                 <div className="col-12">
                     <div className="form-check">
-                        <input className="form-check-input is-invalid" type="checkbox" id="invalidCheck3" required />
-                        <label className="form-check-label" htmlFor="invalidCheck3">
+                        <input className="form-check-input is-invalid" type="checkbox" id="termsCheck" required />
+                        <label className="form-check-label" htmlFor="termsCheck">
                             Agree to terms and conditions
                         </label>
                         <div className="invalid-feedback">You must agree before submitting.</div>
                     </div>
                 </div>
 
+                {/* Submit Button */}
                 <div className="col-12 text-center">
                     <button className="btn btn-primary" type="submit" style={{ width: "100%" }}>
                         Submit
                     </button>
                 </div>
+
+                {/* General Error Message */}
+                {error && <p className="error text-danger text-center">{error}</p>}
             </form>
         </div>
     );

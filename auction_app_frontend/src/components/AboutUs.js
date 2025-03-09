@@ -6,7 +6,7 @@ const AboutUs = () => {
             style={{
                 width: "80%",
                 marginInline: "auto",
-                marginBottom: "50px",
+                margin: "100px auto 40px auto",
                 fontFamily: "Arial, sans-serif",
                 color: "#333",
                 lineHeight: "1.6",
